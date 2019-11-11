@@ -63,7 +63,7 @@ def getEncrypt(keylist, string):
 
 
 def encrypt_string(pkey, pkey_count, keylist, string):
-
+    tempstring = ""
     if pkey == '!':
         outer_list = []
 
@@ -74,11 +74,13 @@ def encrypt_string(pkey, pkey_count, keylist, string):
                 while string[b] != "":
                     if ord(string[b]) < 222:
                         inner_list.append('+')
-                        string[b] = chr(ord(string[b] + 33))
+                        string[b] = chr(ord(string[b]) + 33)
+                        tempstring.append(chr(ord(string[b])))
+
                         b += 1
                     else:
                         inner_list.append('-')
-                        string[b] = chr(ord(string[b] - 33))
+                        string[b] = chr(ord(string[b]) - 33)
                         b += 1
                 print("inner list is: ", inner_list)
 
@@ -107,7 +109,7 @@ def switch_state(argument):
         keylist = '(' + keylist + ')'
         print(keylist)
         #print("keylist is: (" + keylist + ")")
-        getEncrypt(keylist,string)
+        getEncrypt(keylist, string)
 
 
 
@@ -122,6 +124,8 @@ def switch_state(argument):
 def main():
     run = True
     while run:
+
+        print(chr(ord('A')))
         print("1 Encrypt Text")
         print("2 Decrypt Text")
         print("3 Print Encrypted")
