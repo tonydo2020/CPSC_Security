@@ -64,26 +64,56 @@ def getEncrypt(keylist, string):
 
 def encrypt_string(pkey, pkey_count, keylist, string):
     tempstring = ""
-    if pkey == '!':
-        outer_list = []
-
-        b = 0
-        for a in range(pkey_count):
-            if keylist[a] == '!':
+    print("at encrpy string")
+    outer_list = []
+    word = ""
+    word = string
+    for c in range(pkey_count):
+        if pkey == '!':
+            b = 0
+            if keylist[c] == '!':
                 inner_list = []
-                while string[b] != "":
-                    if ord(string[b]) < 222:
-                        inner_list.append('+')
-                        string[b] = chr(ord(string[b]) + 33)
-                        tempstring.append(chr(ord(string[b])))
+                rule_list = []
+                for b in string:
+                    print(b)
+                    if ord(b) < 222:
+                        num = ord(b) + 33
+                        print("num is: ", num, ord(chr(num)) - 33)
+                        print(chr(ord(chr(num)) - 33))
+                        inner_list.append(chr(num))
+                        print(inner_list)
+                        rule_list.append('+')
 
-                        b += 1
-                    else:
-                        inner_list.append('-')
-                        string[b] = chr(ord(string[b]) - 33)
-                        b += 1
-                print("inner list is: ", inner_list)
+                    elif ord(b) >= 222:
+                        num = ord(b) + 33
+                        print("num is: ", num, chr(num))
 
+                        inner_list.append(chr(num))
+                        print(inner_list)
+                        rule_list.append('-')
+
+                outer_list.append(rule_list)
+
+
+    for a in range(len(inner_list)):
+        word[a] = word[a] + 
+        word += rule_list[a]
+
+    print("outer list is: ", outer_list)
+    print("word is: ", word)
+
+        # while string[b] != "":
+                #     if ord(string[b]) < 222:
+                #         print("here")
+                #         inner_list.append('+')
+                #         #string[b] = chr(ord(string[b]) + 33)
+                #         #tempstring.append(chr(ord(string[b])))
+                #         b += 1
+                #     else:
+                #         inner_list.append('-')
+                #         string[b] = chr(ord(string[b]) - 33)
+                #         b += 1
+                #
                 #for b in len(string):
                  #   list[b] = chr(ord(string[b] + 33)) + '+'
 
@@ -106,7 +136,7 @@ def switch_state(argument):
         for a in range(length):
             keylist += getKey()
 
-        keylist = '(' + keylist + ')'
+        keylist = '(!!!' + keylist + ')'
         print(keylist)
         #print("keylist is: (" + keylist + ")")
         getEncrypt(keylist, string)
@@ -125,7 +155,6 @@ def main():
     run = True
     while run:
 
-        print(chr(ord('A')))
         print("1 Encrypt Text")
         print("2 Decrypt Text")
         print("3 Print Encrypted")
